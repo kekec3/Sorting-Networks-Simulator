@@ -1,0 +1,11 @@
+<div class="pseudocode-wrapper" #scrollContainer>
+  <pre class="pseudocode">
+    @for (line of lines(); track $index) {
+      @if (isActiveLine(line)) {
+        <span [class]="'line ' + lineClass(line)" #activeLineEl>{{ line.text || ' ' }}</span>
+      } @else {
+        <span [class]="'line ' + lineClass(line)">{{ line.text || ' ' }}</span>
+      }
+    }
+  </pre>
+</div>

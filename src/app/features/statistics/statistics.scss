@@ -1,0 +1,62 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.stat-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  &.wide {
+    grid-column: span 3;
+  }
+}
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 500;
+  color: #e2e8f0;
+  line-height: 1;
+
+  &.mono {
+    font-family: monospace;
+    font-size: 15px;
+  }
+}
+
+.utilization-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.util-bar-track {
+  flex: 1;
+  height: 4px;
+  background: #1e293b;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.util-bar-fill {
+  height: 100%;
+  background: #6366f1;
+  border-radius: 999px;
+  transition: width 0.2s ease;
+  min-width: 0;
+}

@@ -1,0 +1,139 @@
+<div class="config-wrapper">
+  <div class="section">
+    <label class="section-label">Network Size (N)</label>
+    <div class="size-fetch-row">
+      <input
+        type="text"
+        class="text-input size-input"
+        [ngModel]="targetSize()"
+        (ngModelChange)="targetSize.set($event); networkError.set(null)"
+        (keydown.enter)="loadNetwork()"
+        placeholder="Size (e.g. 2, 4, 8, 16)"
+      />
+      <button class="btn-apply" (click)="loadNetwork()" title="Load selected network">Apply</button>
+    </div>
+
+    <div class="algo-select-row">
+      <span class="sub-label">Type:</span>
+      <select
+        class="select-input"
+        [ngModel]="selectedSource()"
+        (ngModelChange)="selectedSource.set($event); networkError.set(null)"
+      >
+        <option value="bestKnown">Best Known Preset</option>
+        <option value="bitonic">Bitonic Sort</option>
+        <option value="oddEven">Odd-Even Merge Sort</option>
+        <option value="pairwise">Pairwise Sort</option>
+      </select>
+    </div>
+
+    @if (networkError()) {
+      <div class="validation-error">
+        {{ networkError() }}
+      </div>
+    }
+  </div>
+
+  @if (selectedSource() === 'bestKnown') {
+    <div class="section">
+      <label class="section-label">Preset Goal</label>
+      <div class="mode-toggle">
+        <button
+          type="button"
+          class="mode-btn"
+          [class.active]="optimizationGoal() === 'depth'"
+          (click)="setOptimizationGoal('depth')"
+        >
+          Smallest Depth
+        </button>
+        <button
+          type="button"
+          class="mode-btn"
+          [class.active]="optimizationGoal() === 'size'"
+          (click)="setOptimizationGoal('size')"
+        >
+          Smallest Size
+        </button>
+      </div>
+    </div>
+  }
+
+  <div class="network-meta">
+    <span class="meta-chip">N = {{ selectedNetwork().size }}</span>
+    <span class="meta-chip">depth {{ selectedNetwork().depth }}</span>
+    <span class="meta-chip">{{ selectedNetwork().comparatorCount }} comparators</span>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="section">
+    <label class="section-label">Input Data</label>
+    <div class="mode-toggle">
+      <button
+        type="button"
+        class="mode-btn"
+        [class.active]="mode() === 'random'"
+        (click)="setMode('random')"
+      >
+        Random
+      </button>
+      <button
+        type="button"
+        class="mode-btn"
+        [class.active]="mode() === 'manual'"
+        (click)="setMode('manual')"
+      >
+        Manual
+      </button>
+    </div>
+  </div>
+
+  @if (mode() === 'random') {
+    <div class="section">
+      <div class="current-array">
+        @for (val of currentArray(); track $index) {
+          <span class="array-chip">
+            {{ val }}
+          </span>
+        }
+      </div>
+      <button class="btn-reroll" (click)="randomInput()">
+        <svg
+          width="13"
+          height="13"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="16 3 21 3 21 8" />
+          <polyline points="8 21 3 21 3 16" />
+          <line x1="21" y1="3" x2="14" y2="10" />
+          <line x1="3" y1="21" x2="10" y2="14" />
+        </svg>
+        New random
+      </button>
+    </div>
+  }
+
+  @if (mode() === 'manual') {
+    <div class="section">
+      <input
+        class="text-input"
+        type="text"
+        [placeholder]="inputPlaceholder()"
+        [value]="rawInput()"
+        (input)="onRawInputChange($any($event.target).value)"
+        (keydown.enter)="applyManualInput()"
+      />
+      @if (validationError()) {
+        <div class="validation-error">
+          {{ validationError() }}
+        </div>
+      }
+      <button class="btn-apply" (click)="applyManualInput()">Apply</button>
+    </div>
+  }
+</div>

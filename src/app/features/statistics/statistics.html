@@ -1,0 +1,41 @@
+<div class="stats-grid">
+  <div class="stat-card">
+    <span class="stat-label">Network size</span>
+    <span class="stat-value">{{ stats().size }}</span>
+  </div>
+
+  <div class="stat-card">
+    <span class="stat-label">Depth</span>
+    <span class="stat-value">{{ stats().depth }}</span>
+  </div>
+
+  <div class="stat-card">
+    <span class="stat-label">Comparators</span>
+    <span class="stat-value mono">{{ stats().comparatorCount }}</span>
+  </div>
+
+  <div class="stat-card">
+    <span class="stat-label">Current stage</span>
+    <span class="stat-value mono">{{ stats().currentStage }}</span>
+  </div>
+
+  <div class="stat-card">
+    <span class="stat-label">Comparisons</span>
+    <span class="stat-value mono">{{ stats().comparisons }}</span>
+  </div>
+
+  <div class="stat-card">
+    <span class="stat-label">Swaps</span>
+    <span class="stat-value mono">{{ stats().swaps }}</span>
+  </div>
+
+  <div class="stat-card wide">
+    <span class="stat-label">Stage utilization</span>
+    <div class="utilization-row">
+      <span class="stat-value mono">{{ stats().utilization }}</span>
+      <div class="util-bar-track">
+        <div class="util-bar-fill" [style.width.%]="getSimulation().stageUtilization() * 100"></div>
+      </div>
+    </div>
+  </div>
+</div>

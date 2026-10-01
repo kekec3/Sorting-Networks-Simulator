@@ -1,0 +1,92 @@
+<div class="canvas-container">
+  <div class="zoom-controls">
+    <button (click)="zoomIn()" title="Zoom In">+</button>
+    <button (click)="resetZoom()" title="Reset Zoom">{{ zoomProcentage() }}%</button>
+    <button (click)="zoomOut()" title="Zoom Out">-</button>
+  </div>
+
+  <div class="canvas-wrapper" #scrollContainer (wheel)="onWheel($event)">
+    <svg
+      [attr.width]="scaledWidth()"
+      [attr.height]="scaledHeight()"
+      [attr.viewBox]="'0 0 ' + width() + ' ' + height()"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g class="wires">
+        @for (wire of wireSegments(); track wire.wireIndex) {
+          @for (segment of wire.segments; track segment.stageIndex) {
+            <line
+              [attr.x1]="segment.start"
+              [attr.y1]="wire.y"
+              [attr.x2]="segment.end"
+              [attr.y2]="wire.y"
+              [class]="'wire ' + wireSegmentClass(segment.stageIndex)"
+              [attr.stroke-width]="WIRE_THICKNESS"
+            />
+          }
+        }
+      </g>
+
+      <g class="wire-labels">
+        @for (wire of wireSegments(); track wire.wireIndex) {
+          <text
+            [attr.x]="PADDING / 2 - 8"
+            [attr.y]="wire.y"
+            class="wire-label"
+            text-anchor="end"
+            dominant-baseline="central"
+          >
+            {{ wire.wireIndex }}
+          </text>
+        }
+      </g>
+
+      <g class="comparators">
+        @for (
+          c of comparators();
+          track c.stageIndex + '-' + c.comparator.lo + '-' + c.comparator.hi
+        ) {
+          <g
+            [class]="'comparator ' + comparatorClass(c.stageIndex)"
+            [class.comparator-desc]="c.comparator.dir === 'desc'"
+          >
+            <line
+              [attr.x1]="c.x"
+              [attr.y1]="c.top"
+              [attr.x2]="c.x"
+              [attr.y2]="c.bottom"
+              class="comparator-bar"
+            />
+            <circle
+              [attr.cx]="c.x"
+              [attr.cy]="c.top"
+              [attr.r]="COMPARATOR_THICKNESS"
+              class="comparator-dot"
+            />
+            <circle
+              [attr.cx]="c.x"
+              [attr.cy]="c.bottom"
+              [attr.r]="COMPARATOR_THICKNESS"
+              class="comparator-dot"
+            />
+          </g>
+        }
+      </g>
+
+      <g class="tokens">
+        @for (token of tokens(); track token.wireIndex) {
+          <g
+            class="token-group"
+            [class.token-active]="activeWires().has(token.wireIndex)"
+            [attr.transform]="'translate(' + token.x + ', ' + token.y + ')'"
+          >
+            <circle r="16" class="token-circle" />
+            <text class="token-label" text-anchor="middle" dominant-baseline="central">
+              {{ token.value }}
+            </text>
+          </g>
+        }
+      </g>
+    </svg>
+  </div>
+</div>

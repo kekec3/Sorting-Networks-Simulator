@@ -1,0 +1,51 @@
+<div class="gpu-wrapper">
+  <div class="panel-header">
+    <div class="header-title">
+      <span class="status-led" [class.running]="isRunning()"></span>
+      <span class="title-text">PARALLEL CORES GRID</span>
+    </div>
+    <span class="stage-badge">{{ currentStageLabel() }}</span>
+  </div>
+
+  <div class="metrics-row">
+    <div class="metric-card">
+      <span class="metric-label">Utilization</span>
+      <span class="metric-value">{{ utilizationPercent() }}%</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-label">Active Cores</span>
+      <span class="metric-value highlighting">{{ activeCount() }} / {{ coreCount() }}</span>
+    </div>
+  </div>
+
+  <div class="core-grid">
+    @for (core of cores(); track core.index) {
+      <div
+        class="core-cell"
+        [class.active]="core.active"
+        [title]="
+          core.active && core.comparatorInfo
+            ? 'Core ' + (core.index + 1) + ': ' + core.comparatorInfo
+            : 'Core ' + (core.index + 1) + (core.active ? ' (Active)' : ' (Idle)')
+        "
+      >
+        <span class="core-id">{{ core.index + 1 }}</span>
+      </div>
+    }
+  </div>
+
+  <div class="util-row">
+    <div class="util-bar-track">
+      <div
+        class="util-bar-fill"
+        [style.width.%]="utilizationPercent()"
+        [class.high]="utilizationPercent() >= 80"
+      ></div>
+    </div>
+  </div>
+
+  <div class="panel-legend">
+    <span class="legend-item"><span class="dot active"></span> Active Core</span>
+    <span class="legend-item"><span class="dot idle"></span> Idle / Unused Core</span>
+  </div>
+</div>

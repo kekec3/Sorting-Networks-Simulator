@@ -1,0 +1,127 @@
+.controls-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+// ── Button base ─────────────────────────────────────────────────────────────
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s ease, opacity 0.15s ease, transform 0.1s ease;
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+}
+
+// ── Variants ────────────────────────────────────────────────────────────────
+
+.btn-secondary {
+  background: #1e293b;
+  color: #94a3b8;
+  padding: 6px 12px;
+  border: 1px solid #334155;
+
+  &:hover:not(:disabled) {
+    background: #273548;
+    color: #e2e8f0;
+  }
+}
+
+.btn-icon {
+  background: #1e293b;
+  color: #94a3b8;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #334155;
+  border-radius: 10px;
+
+  &:hover:not(:disabled) {
+    background: #273548;
+    color: #e2e8f0;
+  }
+}
+
+.btn-play {
+  background: #6366f1;
+  color: #ffffff;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+
+  &:hover:not(:disabled) {
+    background: #4f46e5;
+    box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.2);
+  }
+}
+
+.btn-speed {
+  background: transparent;
+  color: #64748b;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-family: monospace;
+  font-size: 12px;
+
+  &:hover:not(:disabled) {
+    color: #94a3b8;
+    border-color: #334155;
+  }
+
+  &.active {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-color: #6366f1;
+  }
+}
+
+// ── Rows ────────────────────────────────────────────────────────────────────
+
+.input-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.playback-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.speed-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.speed-label {
+  font-size: 12px;
+  color: #475569;
+  white-space: nowrap;
+}
+
+.speed-options {
+  display: flex;
+  gap: 4px;
+}

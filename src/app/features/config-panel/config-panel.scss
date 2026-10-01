@@ -1,0 +1,242 @@
+.config-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// ── Section ──────────────────────────────────────────────────────────────────
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sub-label {
+  font-size: 11px;
+  color: #64748b;
+}
+
+// ── Network Size, Fetch & Generate ────────────────────────────────────────────
+
+.size-fetch-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+
+  .text-input {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.btn-fetch {
+  background: #6366f1;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+
+  &:hover {
+    background: #4f46e5;
+  }
+}
+
+.btn-generate {
+  background: #10b981;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+
+  &:hover {
+    background: #059669;
+  }
+}
+
+.algo-select-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.select-input {
+  flex: 1;
+  background: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+
+  &:focus {
+    border-color: #10b981;
+  }
+}
+
+.network-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.meta-chip {
+  font-size: 11px;
+  font-family: monospace;
+  color: #64748b;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+// ── Mode toggle ───────────────────────────────────────────────────────────────
+
+.mode-toggle {
+  display: flex;
+  gap: 4px;
+  background: #0f172a;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 6px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  color: #475569;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    color: #94a3b8;
+  }
+
+  &.active {
+    background: #1e293b;
+    color: #e2e8f0;
+  }
+}
+
+// ── Divider ───────────────────────────────────────────────────────────────────
+
+.divider {
+  border: none;
+  border-top: 1px solid #1e293b;
+  margin: 0;
+}
+
+// ── Array display ─────────────────────────────────────────────────────────────
+
+.current-array {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.array-chip {
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: #e2e8f0;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 4px 10px;
+  min-width: 32px;
+  text-align: center;
+}
+
+// ── Buttons ───────────────────────────────────────────────────────────────────
+
+.btn-reroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #334155;
+  border-radius: 7px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  align-self: flex-start;
+
+  &:hover {
+    color: #94a3b8;
+    border-color: #475569;
+  }
+}
+
+.btn-apply {
+  background: #6366f1;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.15s;
+
+  &:hover {
+    background: #4f46e5;
+  }
+}
+
+// ── Manual input ──────────────────────────────────────────────────────────────
+
+.text-input {
+  background: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: monospace;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+
+  &::placeholder {
+    color: #475569;
+  }
+
+  &:focus {
+    border-color: #6366f1;
+  }
+}
+
+.validation-error {
+  font-size: 12px;
+  color: #f87171;
+}

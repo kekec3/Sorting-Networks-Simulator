@@ -1,0 +1,172 @@
+.canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  .zoom-controls {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 3px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+
+    button {
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: monospace;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.15s ease, color 0.15s ease;
+
+      &:hover {
+        background: #1e293b;
+        color: #f8fafc;
+      }
+
+      &:active {
+        background: #334155;
+      }
+    }
+  }
+}
+
+.canvas-wrapper {
+  overflow-x: auto;
+  overflow-y: auto; 
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+
+  scrollbar-width: thin;
+  scrollbar-color: #334155 transparent;
+
+  &::-webkit-scrollbar       { width: 4px; height: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: #334155; border-radius: 999px; }
+}
+
+svg {
+  display: block;
+}
+
+.wire {
+  stroke: #94a3b8;
+  stroke-linecap: round;
+  transition: stroke 0.2s ease, opacity 0.2s ease;
+
+  &.wire-active {
+    stroke: #6366f1;
+    stroke-width: 3px;
+  }
+
+  &.wire-done {
+    stroke: #22c55e;
+    opacity: 0.6;
+  }
+
+  &.wire-future {
+    opacity: 0.7;
+    stroke: #cbd5e1;
+  }
+}
+
+.wire-label {
+  font-size: 12px;
+  fill: #94a3b8;
+  font-family: monospace;
+}
+
+.comparator-bar {
+  stroke: #334155;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: stroke 0.2s ease, opacity 0.2s ease;
+}
+
+.comparator-dot {
+  fill: #334155;
+  transition: fill 0.2s ease, opacity 0.2s ease;
+}
+
+.comparator-active {
+  .comparator-bar { stroke: #6366f1; stroke-width: 4; }
+  .comparator-dot { fill: #6366f1; r: 9; }
+}
+
+.comparator-done {
+  .comparator-bar { stroke: #22c55e; opacity: 0.6; }
+  .comparator-dot { fill: #22c55e; opacity: 0.6; }
+}
+
+.comparator-future {
+  .comparator-bar { stroke: #cbd5e1; opacity: 0.4; }
+  .comparator-dot { fill: #cbd5e1; opacity: 0.4; }
+}
+
+.comparator-desc {
+  .comparator-bar { stroke: #ef4444; }
+  .comparator-dot { fill: #ef4444; }
+}
+
+.token-group {
+  transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.token-circle {
+  fill: #1e293b;
+  stroke: #6366f1;
+  stroke-width: 1.5;
+}
+
+.token-label {
+  font-size: 13px;
+  font-family: monospace;
+  fill: #e2e8f0;
+  font-weight: 500;
+}
+
+.token-active .token-circle {
+  stroke: #a78bfa;
+  stroke-width: 2;
+  fill: #312e81;
+}
+
+.token-active .token-label {
+  fill: #ffffff;
+}
+
+// Dark Mode 
+@media (prefers-color-scheme: dark) {
+  .canvas-wrapper {
+    --canvas-bg: #0f172a;
+  }
+
+  .wire.wire-future {
+    stroke: #475569;
+  }
+
+  .comparator-future {
+    .comparator-bar { stroke: #475569; }
+    .comparator-dot { fill: #475569; }
+  }
+
+  .comparator-bar:not(.comparator-active .comparator-bar):not(.comparator-desc .comparator-bar) {
+    stroke: #cbd5e1;
+  }
+  .comparator-dot:not(.comparator-active .comparator-dot):not(.comparator-desc .comparator-dot) {
+    fill: #cbd5e1;
+  }
+}
